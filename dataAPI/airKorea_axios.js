@@ -1,3 +1,8 @@
+
+//const path = require('path');// 파일과 디렉토리 경로 작업을 위한 기능 제공
+const dotenv = require('dotenv');
+//dotenv.config({ path: path.resolve(__dirname, "../../.env") });// [dotenv]env파일 위치 인식
+dotenv.config();
 const morgan = require('morgan');
 const axios = require('axios');
 const express = require('express');
@@ -10,7 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 
 app.get('/airkorea', async (req, res) => {
-    const serviceKey = '7wYN12VZpr%2FiyQ38IXqKf6Qiasy920D0wCanrMephf05Xb85AgQvp6BICarbK2KuWMLMvAzyBd2YAvl2z3MHNw%3D%3D';
+    console.log('서비스키',process.env.airServiceKey);
+    console.log('포트',process.env.PORT);
+    const serviceKey = process.env.airServiceKey;
     const airUrl = "http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?";
 
     let params = encodeURI('serviceKey') + '=' + serviceKey;
